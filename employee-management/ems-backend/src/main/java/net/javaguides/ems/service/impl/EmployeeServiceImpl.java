@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 ()->new ResourceNotFoundException("Employee with the id does not exists:"+ employeeId)
         );
 
-        employeeRepository.deleteById(employeeId);
+        employeeRepository.deleteById(employeeId); employeeRepository.deleteById(employeeId); employeeRepository.deleteById(employeeId);
     }
 
 }
