@@ -8,6 +8,10 @@ import net.javaguides.ems.mapper.DepartmentMapper;
 import net.javaguides.ems.repository.DepartmentRepository;
 import net.javaguides.ems.service.DepartmentService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class DepartmentServiceImpl implements DepartmentService {
@@ -30,5 +34,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return DepartmentMapper.mapToDepartmentDto(department);
     }
 
-
+    @Override
+    public List<DepartmentDto> getAllDepartments() {
+        List<Department> departments = departmentRepository.findAll();
+        return departments.stream().map((department) -> DepartmentMapper.mapToDepartmentDto(department))
+                .collect(Collectors.toList());
+    }
 }
