@@ -2,6 +2,7 @@ package net.javaguides.ems.controller;
 
 import lombok.AllArgsConstructor;
 import net.javaguides.ems.dto.DepartmentDto;
+import net.javaguides.ems.entity.Department;
 import net.javaguides.ems.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,13 @@ public class DepartmentController {
     public ResponseEntity<List<DepartmentDto>>getAllDepartments(){
       List<DepartmentDto>departments=departmentService.getAllDepartments();
       return ResponseEntity.ok(departments);
+    }
+
+//    Build updateDepartment REST API
+    @PutMapping("{id}")
+    public ResponseEntity<DepartmentDto>updateDepartment(@PathVariable("id") Long departmentId,
+                                                         @RequestBody DepartmentDto updatedDepartment){
+        DepartmentDto departmentDto=departmentService.updateDepartment(departmentId,updatedDepartment);
+        return ResponseEntity.ok(departmentDto);
     }
 }

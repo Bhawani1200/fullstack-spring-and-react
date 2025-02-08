@@ -8,6 +8,8 @@ import net.javaguides.ems.mapper.DepartmentMapper;
 import net.javaguides.ems.repository.DepartmentRepository;
 import net.javaguides.ems.service.DepartmentService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,5 +41,18 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<Department> departments = departmentRepository.findAll();
         return departments.stream().map((department) -> DepartmentMapper.mapToDepartmentDto(department))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public DepartmentDto updateDepartment(Long departmentId,
+                                          DepartmentDto updatedDepartment) {
+        Department department = departmentRepository.findById(departmentId).orElseThrow(() ->
+                new ResourceNotFoundException("Department with that is not found:" + departmentId)
+        );
+        department.setDepartmentName(updatedDepartment.getDepartmentName());
+        department.setDepartmentDescription(updatedDepartment.getDepartmentDescription());
+        Department savedDepartment = departmentRepository.save(department);
+         return DepartmentMapper.mapToDepartmentDto(savedDepartment);
+
     }
 }
