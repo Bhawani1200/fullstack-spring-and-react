@@ -52,7 +52,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         department.setDepartmentName(updatedDepartment.getDepartmentName());
         department.setDepartmentDescription(updatedDepartment.getDepartmentDescription());
         Department savedDepartment = departmentRepository.save(department);
-         return DepartmentMapper.mapToDepartmentDto(savedDepartment);
-
+        return DepartmentMapper.mapToDepartmentDto(savedDepartment);
     }
+
+    @Override
+    public void deleteDepartment(Long departmentId) {
+        departmentRepository.findById(departmentId).orElseThrow(()->
+                new ResourceNotFoundException("Department with that id is not found:"+departmentId));
+       departmentRepository.deleteById(departmentId);
+    }
+
 }

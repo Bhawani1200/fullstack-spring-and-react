@@ -42,4 +42,12 @@ public class DepartmentController {
         DepartmentDto departmentDto=departmentService.updateDepartment(departmentId,updatedDepartment);
         return ResponseEntity.ok(departmentDto);
     }
-}
+
+//    Build delete department REST API
+    @DeleteMapping("{id}")
+       public ResponseEntity<String>deleteDepartment(@PathVariable("id") Long departmentId){
+       departmentService.deleteDepartment(departmentId);
+       return ResponseEntity.ok("Department with the given id is deleted");
+   }
+
+  }
