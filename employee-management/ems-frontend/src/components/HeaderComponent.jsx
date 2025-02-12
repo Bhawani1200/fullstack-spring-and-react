@@ -11,11 +11,14 @@ const HeaderComponent = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className='nav-item' to="/employees">Employees</NavLink>
+                <NavLink className="nav-link" to="/employees">
+                  Employees
+                </NavLink>
               </li>
-              
               <li className="nav-item">
-                <NavLink className='nav-item' to="/departments">Departments</NavLink>
+                <NavLink className="nav-link" to="/departments">
+                  Departments
+                </NavLink>
               </li>
             </ul>
           </div>
