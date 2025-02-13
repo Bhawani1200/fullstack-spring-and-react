@@ -4,21 +4,25 @@ import { getAllDepartments } from "../services/DepartmentService";
 const ListDepartmentsComponents = () => {
   const [departments, setDepartments] = useState([]);
 
+  useEffect(() => {
+   getAllDepartments().then((response)=>{
+    console.log(response.data);
+    setDepartments(response.data);
+   }).catch((error)=>{
+    console.error(error);
+   })
+  }, []);
 
-   useEffect(()=>{
-     listOfDepartments();
-   },[])
-
-  function listOfDepartments() {
-    getAllDepartments()
-      .then((response) => {
-        console.log(response.data);
-        setDepartments(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  // function listOfDepartments() {   
+  //   getAllDepartments()
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       setDepartments(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
 
   return (
     <div className="container">
