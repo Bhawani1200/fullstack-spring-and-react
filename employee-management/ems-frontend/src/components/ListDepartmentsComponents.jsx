@@ -1,32 +1,31 @@
 import { useEffect, useState } from "react";
 import { getAllDepartments } from "../services/DepartmentService";
+import { Link } from "react-router-dom";
 
 const ListDepartmentsComponents = () => {
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-   getAllDepartments().then((response)=>{
-    console.log(response.data);
-    setDepartments(response.data);
-   }).catch((error)=>{
-    console.error(error);
-   })
+    listOfDepartments();
   }, []);
 
-  // function listOfDepartments() {   
-  //   getAllDepartments()
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       setDepartments(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
+  function listOfDepartments() {
+    getAllDepartments()
+      .then((response) => {
+        console.log(response.data);
+        setDepartments(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   return (
     <div className="container">
       <h2 className="text-center">List of Departments</h2>
+      <Link to="/add-department" className="btn btn-primary mb-2">
+        Add Department
+      </Link>
       <table className="table table-striped table-bordered">
         <thead>
           <tr>

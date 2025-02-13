@@ -1,3 +1,4 @@
+import DepartmentComponent from "./components/DepartmentComponent";
 import EmployeeComponent from "./components/EmployeeComponent";
 import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
@@ -25,6 +26,10 @@ function App() {
           <Route
             path="/departments"
             element={<ListDepartmentsComponents />}
+          ></Route>
+          <Route
+            path="/add-department"
+            element={<DepartmentComponent />}
           ></Route>
         </Routes>
 
