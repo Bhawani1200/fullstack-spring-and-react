@@ -31,6 +31,10 @@ function App() {
             path="/add-department"
             element={<DepartmentComponent />}
           ></Route>
+          <Route
+            path="/edit-department/:id"
+            element={<DepartmentComponent />}
+          ></Route>
         </Routes>
 
         <FooterComponent />

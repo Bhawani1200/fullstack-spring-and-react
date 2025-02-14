@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getAllDepartments } from "../services/DepartmentService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListDepartmentsComponents = () => {
   const [departments, setDepartments] = useState([]);
 
+  const navigator = useNavigate();
   useEffect(() => {
     listOfDepartments();
   }, []);
@@ -20,6 +21,9 @@ const ListDepartmentsComponents = () => {
       });
   }
 
+  function updateDepartment(id) {
+    navigator(`/edit-department/${id}`);
+  }
   return (
     <div className="container">
       <h2 className="text-center">List of Departments</h2>
@@ -32,6 +36,7 @@ const ListDepartmentsComponents = () => {
             <th>Department Id</th>
             <th>DepartmentName</th>
             <th>DepartmentDescription</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +45,14 @@ const ListDepartmentsComponents = () => {
               <td>{department.id}</td>
               <td>{department.departmentName}</td>
               <td>{department.departmentDescription}</td>
+              <td>
+                <button
+                  className="btn btn-info"
+                  onClick={() => updateDepartment(department.id)}
+                >
+                  Update
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
