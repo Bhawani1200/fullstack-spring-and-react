@@ -7,10 +7,11 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 
 const DepartmentComponent = () => {
-  const [departmentName, setDepartmentName] = useState();
-  const [departmentDescription, setDepartmentDescription] = useState();
+  const [departmentName, setDepartmentName] = useState("");
+  const [departmentDescription, setDepartmentDescription] = useState("");
 
   const { id } = useParams();
+
   const navigator = useNavigate();
 
   useEffect(() => {
@@ -23,12 +24,13 @@ const DepartmentComponent = () => {
         console.error(error);
       });
   }, [id]);
-  function savedOrUpdateDepartment(e) {
+
+  function saveOrUpdateDepartment(e) {
     e.preventDefault();
 
     const department = { departmentName, departmentDescription };
+
     console.log(department);
-    navigator("/departments");
 
     if (id) {
       updateDepartment(id, department)
@@ -43,6 +45,7 @@ const DepartmentComponent = () => {
       createDepartment(department)
         .then((response) => {
           console.log(response.data);
+          navigator("/departments");
         })
         .catch((error) => {
           console.error(error);
@@ -60,26 +63,28 @@ const DepartmentComponent = () => {
 
   return (
     <div className="container">
-      <br></br>
-      <br></br>
+      <br />
+      <br />
       <div className="row">
         <div className="card col-md-6 offset-md-3 offset-md-3">
           {pageTitle()}
+
           <div className="card-body">
             <form>
               <div className="form-group mb-2">
-                <label name="form-label">Department Name</label>
+                <label className="form-label">Department Name:</label>
                 <input
                   type="text"
                   name="departmentName"
                   placeholder="Enter Department Name"
+                  className="form-control"
                   value={departmentName}
                   onChange={(e) => setDepartmentName(e.target.value)}
-                  className="form-control"
                 ></input>
               </div>
+
               <div className="form-group mb-2">
-                <label name="form-label">Department Description</label>
+                <label className="form-label">Department Description:</label>
                 <input
                   type="text"
                   name="departmentDescription"
@@ -91,7 +96,7 @@ const DepartmentComponent = () => {
               </div>
               <button
                 className="btn btn-success mb-2"
-                onClick={(e) => savedOrUpdateDepartment(e)}
+                onClick={(e) => saveOrUpdateDepartment(e)}
               >
                 Submit
               </button>
