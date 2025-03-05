@@ -2,7 +2,6 @@ package GurkhaYouthsTrainingCenter.Routine_to_do_management.controller;
 
 
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.dto.TodoDto;
-import GurkhaYouthsTrainingCenter.Routine_to_do_management.entity.Todo;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -56,11 +55,18 @@ public class TodoController {
         return ResponseEntity.ok("Todo deleted successfully");
     }
 
-//    build in complete RESt API
+//    build  complete RESt API
     @PatchMapping("{id}/complete")
     public ResponseEntity<TodoDto>completedTodo(@PathVariable("id") Long completedId){
         TodoDto savedCompleted=todoService.completeTodo(completedId);
         return ResponseEntity.ok(savedCompleted);
+    }
+
+//    build in complete RESt API
+    @PatchMapping("{id}/incomplete")
+    public ResponseEntity<TodoDto>inCompleteTodo(@PathVariable("id") Long todoId){
+        TodoDto saveIncomplete=todoService.inCompleteTodo(todoId);
+        return ResponseEntity.ok(saveIncomplete);
     }
 
 }
