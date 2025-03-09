@@ -1,9 +1,10 @@
 import "./App.css";
+import ListTodoComponent from "./components/ListTodoComponent";
 
 function App() {
   return (
     <>
-      <h1>This is todo routine page</h1>
+      <ListTodoComponent/>
     </>
   );
 }
