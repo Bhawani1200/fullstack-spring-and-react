@@ -1,10 +1,14 @@
 import "./App.css";
+import FooterComponent from "./components/FooterComponent";
+import HeaderComponent from "./components/HeaderComponent";
 import ListTodoComponent from "./components/ListTodoComponent";
 
 function App() {
   return (
     <>
-      <ListTodoComponent/>
+      <HeaderComponent />
+      <ListTodoComponent />
+      <FooterComponent />
     </>
   );
 }
