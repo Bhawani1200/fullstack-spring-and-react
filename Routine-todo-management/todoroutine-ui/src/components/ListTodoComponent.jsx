@@ -19,15 +19,16 @@ const ListTodoComponent = () => {
   }
   return (
     <div className="container">
-      <h2 className="text-center">Daily Routines</h2>
+      <h2 className="text-center">List of Todos</h2>
+
       <div>
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Todo Title</th>
               <th>Todo Description</th>
               <th>Todo Completed</th>
-              <th>Actions</th>
+
             </tr>
           </thead>
           <tbody>
