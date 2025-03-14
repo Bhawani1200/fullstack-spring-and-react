@@ -10,7 +10,9 @@ function App() {
       <>
         <HeaderComponent />
         <Routes>
+        {/* http://localhost:8000 */}
           <Route path="/" element={<ListTodoComponent />}></Route>
+          <Route path="/todos" element={<ListTodoComponent/>}></Route>
         </Routes>
 
         <FooterComponent />
