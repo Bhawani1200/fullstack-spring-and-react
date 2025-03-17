@@ -45,7 +45,7 @@ const TodoComponent = () => {
     <div className="container">
       <br /> <br />
       <div className="row">
-        <div className="card col-md-18 offset-md-8 offset-md-8">
+        <div className="card col-md-6 offset-md-3 offset-md-3">
           {pageTitle()}
           <div className="card-body">
             <form>
@@ -84,6 +84,7 @@ const TodoComponent = () => {
                   <option value="true">Yes</option>
                 </select>
               </div>
+
               <button
                 className="btn btn-success"
                 onClick={(e) => saveOrUpdateTodo(e)}

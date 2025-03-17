@@ -37,6 +37,7 @@ const ListTodoComponent = () => {
               <th>Todo Title</th>
               <th>Todo Description</th>
               <th>Todo Completed</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +46,9 @@ const ListTodoComponent = () => {
                 <td>{todo.title}</td>
                 <td>{todo.description}</td>
                 <td>{todo.completed ? "YES" : "NO"}</td>
+                <td>
+                  <button className="btn btn-info">Update</button>
+                </td>
               </tr>
             ))}
           </tbody>
