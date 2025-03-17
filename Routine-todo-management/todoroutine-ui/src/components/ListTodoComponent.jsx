@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllTodos } from "../services/TodoServices.js";
+import { getAllTodos, } from "../services/TodoServices.js";
 import { useNavigate } from "react-router-dom";
 
 const ListTodoComponent = () => {
@@ -22,6 +22,11 @@ const ListTodoComponent = () => {
   }
   function AddNewTodo() {
     navigate("/add-todo");
+  }
+
+  function updateTodo(id){
+    console.log(id);
+    navigate(`/update-todo/$id`);
   }
 
   return (
@@ -47,7 +52,12 @@ const ListTodoComponent = () => {
                 <td>{todo.description}</td>
                 <td>{todo.completed ? "YES" : "NO"}</td>
                 <td>
-                  <button className="btn btn-info">Update</button>
+                  <button
+                    className="btn btn-info"
+                    onClick={() => updateTodo(todo.id)}
+                  >
+                    Update
+                  </button>
                 </td>
               </tr>
             ))}

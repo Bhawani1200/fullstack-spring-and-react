@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { saveTodo, updateTodo } from "../services/TodoServices";
+import { getTodo, saveTodo, updateTodo } from "../services/TodoServices";
 
 const TodoComponent = () => {
   const [completed, setCompleted] = useState("false");
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const navigate = useNavigate();
-  const id = useParams();
+  const { id } = useParams();
 
   function pageTitle() {
     if (id) {
@@ -41,6 +41,20 @@ const TodoComponent = () => {
         });
     }
   }
+  useEffect(() => {
+    if (id) {
+      getTodo(id)
+        .then((response) => {
+          console.log(response.data);
+          setTitle(response.data.title);
+          setDescription(response.data.description);
+          setCompleted(response.data.completed);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [id]);
   return (
     <div className="container">
       <br /> <br />
