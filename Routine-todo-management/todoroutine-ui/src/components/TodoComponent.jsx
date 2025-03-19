@@ -3,19 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getTodo, saveTodo, updateTodo } from "../services/TodoServices";
 
 const TodoComponent = () => {
-  const [completed, setCompleted] = useState("false");
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
+  const [completed, setCompleted] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
 
-  function pageTitle() {
-    if (id) {
-      return <h2 className="text-center">Update Todo</h2>;
-    } else {
-      return <h2 className="text-center">Add Todo</h2>;
-    }
-  }
   function saveOrUpdateTodo(e) {
     e.preventDefault();
     const todo = { title, description, completed };
@@ -23,8 +16,7 @@ const TodoComponent = () => {
 
     if (id) {
       updateTodo(id, todo)
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           navigate("/todos");
         })
         .catch((error) => {
@@ -41,6 +33,13 @@ const TodoComponent = () => {
         });
     }
   }
+  function pageTitle() {
+    if (id) {
+      return <h2 className="text-center">Update Todo</h2>;
+    } else {
+      return <h2 className="text-center">Add Todo</h2>;
+    }
+  }
   useEffect(() => {
     if (id) {
       getTodo(id)
@@ -50,7 +49,7 @@ const TodoComponent = () => {
           setDescription(response.data.description);
           setCompleted(response.data.completed);
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error);
         });
     }
