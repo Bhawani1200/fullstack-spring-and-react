@@ -4,6 +4,7 @@ import FooterComponent from "./components/FooterComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import ListTodoComponent from "./components/ListTodoComponent";
 import TodoComponent from "./components/TodoComponent";
+import RegisterComponent from "./components/RegisterComponent";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Route path="/add-todo" element={<TodoComponent />}></Route>
             {/* http://localhost:8000/update-todo */}
           <Route path="/update-todo/:id" element={<TodoComponent />}></Route>
+          {/* http://loaclhost:3000/register */}
+          <Route path="/register" element={<RegisterComponent/>}></Route>
         </Routes>
 
         <FooterComponent />
