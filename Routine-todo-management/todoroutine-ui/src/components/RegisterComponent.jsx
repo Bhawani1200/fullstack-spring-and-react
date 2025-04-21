@@ -13,11 +13,11 @@ const RegisterComponent = () => {
     const register = { name, username, email, password };
     console.log(register);
 
-    registerAPICall()
+    registerAPICall(register)
       .then((response) => {
         console.log(response.data);
       })
-      .catch((error) => {
+      .catch(error=> {
         console.error(error);
       });
   }
