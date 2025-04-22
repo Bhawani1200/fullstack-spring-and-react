@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginAPICall, storeToken } from "../services/AuthService";
 
 const LoginComponent = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const navigator = useNavigate();
 
+  function handleLoginForm(e) {
+    e.preventDefault();
 
-  function handleLoginForm(){
+    loginAPICall(username, password)
+      .then((response) => {
+        console.log(response.data);
+        const token = "Basic" + window.btoa(username + ":" + password);
+        storeToken(token);
 
+        navigator("/todos");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   return (
     <div className="container">
-    <br></br>
+      <br></br>
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <div className="card">
@@ -37,9 +49,7 @@ const LoginComponent = () => {
                   </div>
                 </div>
                 <div className="row mb-3">
-                  <label className="col-md-3 control-label">
-                    Password
-                  </label>
+                  <label className="col-md-3 control-label">Password</label>
                   <div className="col-md-9">
                     <input
                       type="text"
