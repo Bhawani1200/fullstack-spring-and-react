@@ -2,25 +2,27 @@ import React, { useState } from "react";
 import { registerAPICall } from "../services/AuthService";
 
 const RegisterComponent = () => {
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleRegistrationForm(e) {
     e.preventDefault();
 
     const register = { name, username, email, password };
+
     console.log(register);
 
     registerAPICall(register)
       .then((response) => {
         console.log(response.data);
       })
-      .catch(error=> {
+      .catch((error) => {
         console.error(error);
       });
   }
+
   return (
     <div className="container">
       <br /> <br />
@@ -30,6 +32,7 @@ const RegisterComponent = () => {
             <div className="card-header">
               <h2 className="text-center"> User Registration Form </h2>
             </div>
+
             <div className="card-body">
               <form>
                 <div className="row mb-3">

@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginAPICall, storeToken } from "../services/AuthService";
+import { loginAPICall, savedLoggedInUser, storeToken } from "../services/AuthService";
 
 const LoginComponent = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const navigator = useNavigate();
 
-  function handleLoginForm(e) {
+  async function handleLoginForm(e) {
     e.preventDefault();
 
-    loginAPICall(username, password)
+    await loginAPICall(username, password)
       .then((response) => {
         console.log(response.data);
         const token = "Basic" + window.btoa(username + ":" + password);
         storeToken(token);
-
         navigator("/todos");
+
+        savedLoggedInUser(username);
+        navigator("/todos")
+        window.location.reload(false);
+        
       })
       .catch((error) => {
         console.error(error);
