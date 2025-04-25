@@ -10,12 +10,9 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
@@ -27,12 +24,13 @@ public class SpringSecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
+
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     DefaultSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests((authorize) -> {
+        http.cors().and().csrf().disable().authorizeHttpRequests((authorize) -> {
 //                   authorize.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN");
 //                   authorize.requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN");
 //                  authorize.requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN");
@@ -40,7 +38,7 @@ public class SpringSecurityConfig {
 //                  authorize.requestMatchers(HttpMethod.PATCH,"/api/**").hasAnyRole("ADMIN","USER");
 //            authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll();
             authorize.requestMatchers("/api/auth/**").permitAll();
-            authorize.requestMatchers("/**").permitAll();
+            authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
         return http.build();
@@ -48,10 +46,22 @@ public class SpringSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+
         return configuration.getAuthenticationManager();
     }
-
 //    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOrigins(List.of("http://localhost:3000")); // React origin
+//        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+//        config.setAllowedHeaders(List.of("*"));
+//        config.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return source;
+//    }
+////    @Bean
 //    public UserDetailsService userDetailsService(){
 //     UserDetails ramesh = User.builder()
 //               .username("ramesh")

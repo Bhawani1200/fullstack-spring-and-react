@@ -1,7 +1,6 @@
 package GurkhaYouthsTrainingCenter.Routine_to_do_management.security;
 
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.entity.User;
-import GurkhaYouthsTrainingCenter.Routine_to_do_management.exception.ResourceNotFoundException;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

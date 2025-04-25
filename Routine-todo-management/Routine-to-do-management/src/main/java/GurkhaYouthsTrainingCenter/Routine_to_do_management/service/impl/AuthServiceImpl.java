@@ -9,7 +9,6 @@ import GurkhaYouthsTrainingCenter.Routine_to_do_management.repository.RoleReposi
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.repository.UserRepository;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.service.AuthService;
 import lombok.AllArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,8 +27,6 @@ public class AuthServiceImpl implements AuthService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
-
-
 
     @Override
     public String register(RegisterDto registerDto) {
@@ -52,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         Set<Role> roles =new HashSet<>();
-        Role userRole=roleRepository.findByName("ROLE_USER");
+        Role userRole=roleRepository.findByName("USERS_ROLE");
         roles.add(userRole);
 
         user.setRoles(roles);
@@ -68,7 +64,6 @@ public class AuthServiceImpl implements AuthService {
                 loginDto.getPassword()
         ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         return "User login successfully";
     }
 }

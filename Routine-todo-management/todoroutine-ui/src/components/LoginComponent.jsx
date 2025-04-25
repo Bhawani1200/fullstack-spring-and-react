@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { loginAPICall, savedLoggedInUser, storeToken } from "../services/AuthService";
 
 const LoginComponent = () => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState([]);
+  const [password, setPassword] = useState([]);
   const navigator = useNavigate();
 
   async function handleLoginForm(e) {
