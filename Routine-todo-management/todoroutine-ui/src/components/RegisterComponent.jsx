@@ -16,12 +16,14 @@ const RegisterComponent = () => {
 
     registerAPICall(register)
       .then((response) => {
+
         console.log(response.data);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error.response);
       });
   }
+  
 
   return (
     <div className="container">

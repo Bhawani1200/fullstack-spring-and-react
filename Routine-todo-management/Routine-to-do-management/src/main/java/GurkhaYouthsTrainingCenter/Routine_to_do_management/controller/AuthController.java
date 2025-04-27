@@ -26,7 +26,7 @@ public class AuthController {
 
 //    build login REST API
 
-    @PostMapping("/login")
+   @PostMapping("/login")
     public  ResponseEntity<String>login(@RequestBody LoginDto loginDto){
        String response= authService.login(loginDto);
        return new ResponseEntity<>(response,HttpStatus.CREATED);
