@@ -12,10 +12,10 @@ export const storeToken = (token) => localStorage.setItem("token", token);
 
 export const getToken = () => localStorage.getItem("token");
 
-export const savedLoggedInUser = (username, role) =>
+export const savedLoggedInUser = (username, role) =>{
   sessionStorage.setItem("authenticatedUser", username);
   sessionStorage.setItem("role", role);
-
+}
 export const isUserLoggedIn = () => {
   const username = sessionStorage.getItem("authenticatedUser");
   if (username == null) {

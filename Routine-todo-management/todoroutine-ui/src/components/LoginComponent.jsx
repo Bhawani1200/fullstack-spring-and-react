@@ -23,7 +23,7 @@ const LoginComponent = () => {
         storeToken(token);
         navigator("/todos");
 
-        savedLoggedInUser(username);
+        savedLoggedInUser(username,role);
         navigator("/todos");
         window.location.reload(false);
       })
