@@ -1,6 +1,8 @@
 package GurkhaYouthsTrainingCenter.Routine_to_do_management.config;
 
 
+import GurkhaYouthsTrainingCenter.Routine_to_do_management.security.JwtAuthenticationEntryPoint;
+import GurkhaYouthsTrainingCenter.Routine_to_do_management.security.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @AllArgsConstructor
@@ -21,6 +24,10 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 public class SpringSecurityConfig {
 
     private UserDetailsService userDetailsService;
+
+   private JwtAuthenticationEntryPoint authenticatedEntryPoint;
+
+   private JwtAuthenticationFilter authenticationFilter;
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -41,6 +48,11 @@ public class SpringSecurityConfig {
             authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
             authorize.anyRequest().authenticated();
         }).httpBasic(Customizer.withDefaults());
+
+        http.exceptionHandling(exception->exception
+                .authenticationEntryPoint(authenticatedEntryPoint));
+
+        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

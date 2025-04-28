@@ -1,5 +1,6 @@
 package GurkhaYouthsTrainingCenter.Routine_to_do_management.controller;
 
+import GurkhaYouthsTrainingCenter.Routine_to_do_management.dto.JwtAuthResponse;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.dto.LoginDto;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.dto.RegisterDto;
 import GurkhaYouthsTrainingCenter.Routine_to_do_management.service.AuthService;
@@ -27,8 +28,11 @@ public class AuthController {
 //    build login REST API
 
    @PostMapping("/login")
-    public  ResponseEntity<String>login(@RequestBody LoginDto loginDto){
-       String response= authService.login(loginDto);
-       return new ResponseEntity<>(response,HttpStatus.CREATED);
+    public  ResponseEntity<JwtAuthResponse>login(@RequestBody LoginDto loginDto){
+       String token= authService.login(loginDto);
+
+       JwtAuthResponse jwtAuthResponse=new JwtAuthResponse();
+       jwtAuthResponse.setAccessToken(token);
+       return new ResponseEntity<>(jwtAuthResponse,HttpStatus.CREATED);
     }
 }
